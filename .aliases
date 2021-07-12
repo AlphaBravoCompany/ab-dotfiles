@@ -1,0 +1,5 @@
+alias k="kubectl"
+alias kaf="kubectl apply -f"
+alias kgn="kubectl get nodes"
+alias pip3-upgrade='pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install --user'
+alias python=/usr/local/bin/python3
