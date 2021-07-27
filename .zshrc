@@ -1,9 +1,4 @@
 export ZSH="$HOME/.oh-my-zsh"
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-export GOPATH=$HOME/data/go-workspace
-export GOROOT=/usr/local/opt/go/libexec
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$GOROOT/bin
 
 ## Set THEME and COLORS.
 ZSH_THEME="spaceship"
@@ -12,6 +7,7 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff8700"
 ## Set source files. This needs to be left exactly where it is.
 source $ZSH/oh-my-zsh.sh
 source $HOME/.aliases
+source <(kubectl completion zsh)
 
 ## Enable plugins.
 plugins=(git kubectl docker zsh-autosuggestions)
@@ -95,4 +91,3 @@ SPACESHIP_DOCKER_PREFIX="on "
 SPACESHIP_DOCKER_SUFFIX="$SPACESHIP_PROMPT_DEFAULT_SUFFIX"
 SPACESHIP_DOCKER_SYMBOL="🐳 "
 SPACESHIP_DOCKER_COLOR="cyan"
-
