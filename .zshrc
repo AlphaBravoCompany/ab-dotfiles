@@ -91,3 +91,22 @@ SPACESHIP_DOCKER_PREFIX="on "
 SPACESHIP_DOCKER_SUFFIX="$SPACESHIP_PROMPT_DEFAULT_SUFFIX"
 SPACESHIP_DOCKER_SYMBOL="🐳 "
 SPACESHIP_DOCKER_COLOR="cyan"
+
+# Save .zshrc_history to .persisten_history
+setopt append_history # append rather then overwrite
+setopt extended_history # save timestamp
+setopt inc_append_history # add history immediately after typing a command
+
+precmd() { # This is a function that will be executed before every prompt
+    local date_part="$(tail -1 ~/.zsh_history | cut -c 3-12)"
+    local fmt_date="$(date -d @${date_part} +'%Y-%m-%d %H:%M:%S')"
+    # For older version of command "date", comment the last line and uncomment the next line
+    #local fmt_date="$(date -j -f '%s' ${date_part} +'%Y-%m-%d %H:%M:%S')"
+    local command_part="$(tail -1 ~/.zsh_history | cut -c 16-)"
+    local pwd=#"$(pwd)"
+    if [ "$command_part" != "$PERSISTENT_HISTORY_LAST" ]
+    then
+        echo "${fmt_date} | ${pwd} |  ${command_part}"  >> ~/.persistent_history
+        export PERSISTENT_HISTORY_LAST="$command_part"
+    fi
+}
